@@ -1,0 +1,15 @@
+#form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    min-height: 100vh;
+}
+
+.form-fields {
+    width: 50vh;
+}
+
+#login-button {
+    width: 50vh;
+}
