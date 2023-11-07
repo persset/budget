@@ -3,35 +3,25 @@
     <div id="page-content">
         <mat-tab-group>
             <mat-tab label="Income">
-                <table mat-table [dataSource]="dataSource">
-                    <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-                        <th mat-header-cell *matHeaderCellDef>
-                            {{ col.label }}
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
-                                <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                                    <button mat-button (click)="element.isEdit = !element.isEdit">Edit</button>
-                                </div>
-                                <span *ngSwitchDefault>
-                                    {{ element[col.key] }}
-                                </span>
-                            </div>
-                            <div *ngIf="element.isEdit">
-                                <div class="btn-edit" *ngIf="col.key === 'isEdit'; else dataField">
-                                    <button mat-button (click)="element.isEdit = !element.isEdit">Done</button>
-                                </div>
-                                <ng-template #dataField>
-                                    <mat-form-field>
-                                        <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
-                                    </mat-form-field>
-                                </ng-template>
-                            </div>
-                        </td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-                </table>
+                <mat-toolbar color="primary" id="income-toolbar">Income</mat-toolbar>
+                <div class="income-div">
+                    <table mat-table [dataSource]="dataSource" class="income-table">
+                        <!-- Week Column -->
+                        <ng-container matColumnDef="week">
+                            <th mat-header-cell *matHeaderCellDef>Week</th>
+                            <td mat-cell *matCellDef="let element"><b>{{element.week}}</b></td>
+                        </ng-container>
+
+                        <!-- Value Column -->
+                        <ng-container matColumnDef="value">
+                            <th mat-header-cell *matHeaderCellDef>Value</th>
+                            <td mat-cell *matCellDef="let element">{{element.value}}</td>
+                        </ng-container>
+                        <tr mat-row (click)="clickedRows.add(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
+                            *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <p>Hint: You can click on each week line to change it's values</p>
+                </div>
             </mat-tab>
             <mat-tab label="Expenses">Expenses</mat-tab>
         </mat-tab-group>
