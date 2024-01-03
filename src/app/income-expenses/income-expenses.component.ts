@@ -18,7 +18,15 @@ export interface Expense {
   value: number;
 }
 
-const ELEMENT_DATA: Expense[] = [
+const EXPENSE_DATA: Expense[] = [
+  { id: 1, name: 'Name 1', value: 100 },
+  { id: 2, name: 'Name 2', value: 100 },
+  { id: 3, name: 'Name 3', value: 100 },
+  { id: 4, name: 'Name 4', value: 100 },
+  { id: 1, name: 'Name 1', value: 100 },
+  { id: 2, name: 'Name 2', value: 100 },
+  { id: 3, name: 'Name 3', value: 100 },
+  { id: 4, name: 'Name 4', value: 100 },
   { id: 1, name: 'Name 1', value: 100 },
   { id: 2, name: 'Name 2', value: 100 },
   { id: 3, name: 'Name 3', value: 100 },
@@ -45,7 +53,7 @@ const ELEMENT_DATA: Expense[] = [
 })
 export class IncomeExpensesComponent {
   displayedColumns: string[] = ['select', 'name', 'value'];
-  dataSource = new MatTableDataSource<Expense>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Expense>(EXPENSE_DATA);
   selection = new SelectionModel<Expense>(true, []);
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -73,6 +81,12 @@ export class IncomeExpensesComponent {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
       row.id + 1
     }`;
+  }
+
+  getTotalExpenses() {
+    return this.dataSource.data
+      .map((t) => t.value)
+      .reduce((acc, value) => acc + value, 0);
   }
 
   addIncome() {}

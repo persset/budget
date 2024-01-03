@@ -8,9 +8,11 @@
     margin: 1.5rem auto 1.5rem;
 }
 
-.income-table {
+.table-container {
     border: 1px solid black;
     margin-bottom: 1rem;
+    max-height: 40vh;
+    overflow: auto;
 }
 
 .mat-column-week {
@@ -33,4 +35,8 @@
 .add-income-button {
     width: 20%;
     height: 15%;
+}
+
+tr.mat-mdc-footer-row {
+    font-weight: bold;
 }
